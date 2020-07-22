@@ -1,66 +1,70 @@
+user = null;
+
+CLIENT = function(){
+    this.user=null//当前登录用户
+    this.URL="http://www.platinumcat.51vip.biz"
+}
+
+
+
 //注意：导航 依赖 element 模块，否则无法进行功能性操作
 layui.use('element', function () {
     var element = layui.element;
-    //一些事件监听
-    element.on('tab(demo)', function (data) {
-        console.log(data);
-    });
-
-
 });
 
 // 加载表单模块
 layui.use('form', function () {
     var form = layui.form;
+    //表单数据监控
 
-    //监听单机事件
-    form.on('submit(formDemo)', function (data) {
-        //打印得到的数据
-        console.log(data)
-        //判断两次密码是否相同
-        if (data.field.password != data.field.password2) {
-            //密码不相同
-            layer.msg("两次密码不一致")
-            return false;
+    //注册
+    form.on('submit(zhuce)', function (data) {
+        if(data.field.password!=data.field.password1){
+            layer.msg("密码不一致")
+            return false
         }
-        layer.msg(JSON.stringify(data.field));
-        vue.data.formData=
-        {
-            "city": data.field.city,
-            "desc":data.field.desc,
-            "like": data.field.like.like,
-            "password": data.field.password,
-            "sex": data.field.sex,
-            "switch": data.field.switch,
-            "title": data.field.title
-        }
+        $.ajax({
+            type: "post",
+            url: CLIENT.URL+"/register",
+            data: {
+                name:data.field.username,
+                password:data.field.password,
+                gender:data.field.sex
+            },
+            dataType: "json",
+            success: function (response) {
+                layer.msg("请求完成")
+                console,log(response);
+                return false
+            },
+            error:function(data){
+                layer.msg("发生了不可抗的事故")
+                return false
+            }
+        });
         return false;
     });
+
+    //登录
+    form.on('submit(denglu)',function(data){
+        $.ajax({
+            type: "post",
+            url: CLIENT.URL,
+            data: {
+
+            },
+            dataType: "json",
+            success: function (response) {
+                layer.msg("成功")
+                console,log(response)
+                return false
+            },
+            error:function(data){
+                layer.msg("出错了")
+                return false
+            }
+            
+        })
+        return false
+    })
 });
-
-var vue = new Vue({
-    el: "#app",
-    data: {
-        sheng: sheng,
-        formData: null,
-        form:{
-            username: '',
-            password:'',
-            password2:'',
-            city:'',
-            like:[],
-            switch:true,
-            sex:'',
-            desc:'',
-        }
-    },
-    methods:{
-        tijiao : function (params) {
-            this.form.password
-        }
-    }
-})
-
-// function submit(){
-//     if()
-// }
