@@ -1,0 +1,8 @@
+/* 注册居中 */
+.jz{
+    width: 500px;
+    height: 400px;
+    /* text-align: center; */
+    margin: 0 auto;
+    margin-top: 100px;
+}
