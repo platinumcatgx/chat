@@ -1,3 +1,5 @@
+var storage = window.localStorage;
+
 // 加载表单模块
 layui.use('form', function () {
     var form = layui.form;
@@ -32,6 +34,7 @@ layui.use('form', function () {
                 length: 1
                 __proto__: Object
                 */
+                storage.setItem("user",response)//把响应体放入缓存
                 return false
             },
             error: function (data) {
@@ -57,6 +60,7 @@ layui.use('form', function () {
             success: function (response) {
                 layer.msg("成功")
                 console.log(response)
+                storage.setItem("user",response)//把响应体放入缓存
                 return false
             },
             error: function (data) {

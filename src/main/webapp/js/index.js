@@ -5,7 +5,7 @@ CLIENT = function () {
     this.URL = "http://www.platinumcat.51vip.biz"
 }
 
-//设置点击导航栏转跳页面
+// 设置点击导航栏转跳页面
 $(document).ready(function(){
     $("dd>a").click(function (e) {
         e.preventDefault();//设置点击不转跳
@@ -15,4 +15,11 @@ $(document).ready(function(){
 
 layui.use('element', function () {
     var element = layui.element
+})
+
+new Vue({
+    el:'#app',
+    data:{
+
+    }
 })
